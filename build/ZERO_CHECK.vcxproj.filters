@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\clang\clang+llvm-18.1.8-x86_64-pc-windows-msvc\clang+llvm-18.1.8-x86_64-pc-windows-msvc\NF\backtester\build\CMakeFiles\68c00a4a2d5044656431bb10ba3e3cf7\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{1B8D9150-D56F-363D-A0A0-3E16B0AFAD6E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

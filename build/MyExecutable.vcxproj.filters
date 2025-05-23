@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\clang\clang+llvm-18.1.8-x86_64-pc-windows-msvc\clang+llvm-18.1.8-x86_64-pc-windows-msvc\NF\backtester\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\clang\clang+llvm-18.1.8-x86_64-pc-windows-msvc\clang+llvm-18.1.8-x86_64-pc-windows-msvc\NF\backtester\src\data.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\clang\clang+llvm-18.1.8-x86_64-pc-windows-msvc\clang+llvm-18.1.8-x86_64-pc-windows-msvc\NF\backtester\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{35E1BBF7-DAD2-3751-A666-3C6A7506F9A2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

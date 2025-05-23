@@ -1,0 +1,3 @@
+D:/clang/clang+llvm-18.1.8-x86_64-pc-windows-msvc/clang+llvm-18.1.8-x86_64-pc-windows-msvc/NF/backtester/build/CMakeFiles/MyExecutable.dir
+D:/clang/clang+llvm-18.1.8-x86_64-pc-windows-msvc/clang+llvm-18.1.8-x86_64-pc-windows-msvc/NF/backtester/build/CMakeFiles/ALL_BUILD.dir
+D:/clang/clang+llvm-18.1.8-x86_64-pc-windows-msvc/clang+llvm-18.1.8-x86_64-pc-windows-msvc/NF/backtester/build/CMakeFiles/ZERO_CHECK.dir

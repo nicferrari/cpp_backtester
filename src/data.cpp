@@ -1,0 +1,46 @@
+#include "data.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
+
+Data::Data(const std::string& dt, float o, float h, float l, float c)
+    : datetime(dt), open(o), high(h), low(l), close(c) {}
+
+TimeSeries::TimeSeries(const std::string& filename) {
+    std::ifstream file(filename);
+    std::string line;
+
+    if (!file.is_open()) {
+        std::cerr << "Error opening file!" << std::endl;
+        return;
+    }
+
+    // Skip header if present
+    std::getline(file, line);
+
+    while (std::getline(file, line)) {
+        std::istringstream ss(line);
+        std::string datetime;
+        float open, high, low, close;
+
+        std::getline(ss, datetime, ',');
+        ss >> open;
+        ss.ignore();
+        ss >> high;
+        ss.ignore();
+        ss >> low;
+        ss.ignore();
+        ss >> close;
+
+        timeseries.emplace_back(datetime, open, high, low, close);
+    }
+
+    file.close();
+}
+
+void TimeSeries::printData() const {
+    for (const auto& d : timeseries) {
+        std::cout << d.datetime << " | " << d.open << " " << d.high
+                  << " " << d.low << " " << d.close << std::endl;
+    }
+}
