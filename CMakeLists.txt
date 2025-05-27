@@ -3,4 +3,7 @@ project(backtester)
 
 include_directories(include)
 
-add_executable(MyExecutable src/main.cpp src/data.cpp)
+add_executable(MyExecutable src/main.cpp src/data.cpp
+        include/ta.h
+        src/ta.cpp
+)

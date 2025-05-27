@@ -1,8 +1,0 @@
-in vscode: ctr+p e scegliere come kit Visual Studio amd64_x86
-
-cmake -S . -B build ----necessario solo per cambi CMakeLists
-cmake --build build
-
-rmdir /s /q build ---------se serve cancellare la directory del build
-
-build\Debug\MyExecutable ------- per lanciare executable direttamente
