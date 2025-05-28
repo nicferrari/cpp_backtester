@@ -44,3 +44,17 @@ void TimeSeries::printData() const {
                   << " " << d.low << " " << d.close << std::endl;
     }
 }
+void TimeSeries::saveToCsv(const std::string &filename) const {
+    std::ofstream file(filename);
+    if (!file.is_open()) {
+        std::cerr << "Error opening file." << std::endl;
+        return;
+    }
+    file << "Date,Open,High,Low,Close\n";  // Header
+    for (const auto& i : this->timeseries) {
+        file << i.datetime << "," << i.open << "," << i.high << "," << i.low << "," << i.close <<"\n";
+    }
+    file.close();
+    std::cout << "Data saved to " << filename << std::endl;
+}
+

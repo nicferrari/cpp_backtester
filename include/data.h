@@ -16,6 +16,7 @@ public:
     std::vector<Data> timeseries;
     explicit TimeSeries(const std::string& filename);
     void printData() const;
+    void saveToCsv(const std::string& filename) const;
 };
 
 #endif // DATA_H
