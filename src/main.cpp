@@ -1,5 +1,6 @@
 #include <fstream>
 #include "data.h"
+#include "strategy.h"
 #include "ta.h"
 
 int main() {
@@ -9,5 +10,7 @@ int main() {
     sma.print();
     sma.save("test.csv");
     ts.saveToCsv("data_test.csv");
+    SMA_Strategy sma_strategy(ts,sma);
+    sma_strategy.saveToCsv("data_test.csv");
     return 0;
 }
