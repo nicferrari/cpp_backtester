@@ -5,16 +5,19 @@
 
 class Indicator {
 protected:
-    std::vector<double> indicators;
+
+
+    Indicator(TimeSeries ts);
+public:
+    TimeSeries ts;  //better protected?
+    std::vector<double> indicators; //better protected?
     void printIndicators() const;
     void saveToCsv(const std::string& filename) const;
 };
 
-class SMA:Indicator {
+class SMA:public Indicator {
 public:
     SMA(const TimeSeries& ts, int period);
-    void print() const;
-    void save(const std::string& filename) const;
 };
 
 #endif //TA_H
