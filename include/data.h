@@ -8,7 +8,7 @@ class Data {
 public:
     std::string datetime;
     double open, high, low, close;
-    Data(const std::string& dt, float o, float h, float l, float c);
+    Data(std::string  dt, float o, float h, float l, float c);
 };
 
 class TimeSeries {

@@ -2,16 +2,22 @@
 #include "ta.h"
 #include <iostream>
 #include <fstream>
+#include <utility>
 #include "data.h"
 
-SMA_Strategy::SMA_Strategy(SMA sma): Strategy(sma), sma(sma) {
-    int i = this->indicators.ts.timeseries.size();
+SMA_Strategy::SMA_Strategy(const SMA& sma): Strategy(sma), sma(sma) {
+    size_t i = this->indicators.ts.timeseries.size();
     choices.resize(i,Choice::NA);
+    for (int j = 0; j < i; j++) {
+        if (this->sma.indicators[j]==-1) choices[j]=NA;
+        else if (this->sma.ts.timeseries[j].close>this->sma.indicators[j]) choices[j]=LONG;
+        else if (this->sma.ts.timeseries[j].close<this->sma.indicators[j]) choices[j]=SHORT;
+    }
 }
 
-Strategy::Strategy(Indicator indicators):indicators(indicators) {}
+Strategy::Strategy(Indicator ind):indicators(std::move(ind)) {}
 
-std::ostream& operator<<(std::ostream& os, Choice choice) {
+std::ostream& operator<<(std::ostream& os, const Choice choice) {
     switch (choice) {
         case LONG: os << "LONG"; break;
         case SHORT: os << "SHORT"; break;
@@ -21,14 +27,13 @@ std::ostream& operator<<(std::ostream& os, Choice choice) {
     return os;
 }
 
-void Strategy::saveToCsv(std::string filename) {
+void Strategy::saveToCsv(const std::string& filename) const {
     std::ofstream file(filename);
     if (!file.is_open()) {
         std::cerr << "Error opening file." << std::endl;
         return;
     }
-    file << "Date,Close,Indicator,Choice\n";  // Header
-    //    for (const auto& i : this->indicators) {
+    file << "Date,Close,Indicator,Choice\n";
     for (int i=0;i<this->indicators.ts.timeseries.size();i++) {
         file << this->indicators.ts.timeseries[i].datetime << "," << this->indicators.ts.timeseries[i].close << ","
         << this->indicators.indicators[i] << "," << this->choices[i] << "\n";

@@ -1,6 +1,7 @@
 #include "ta.h"
 #include <iostream>
 #include <fstream>
+#include <utility>
 #include "data.h"
 
 void Indicator::printIndicators() const {
@@ -15,8 +16,8 @@ void Indicator::saveToCsv(const std::string& filename) const {
         std::cerr << "Error opening file." << std::endl;
         return;
     }
-    file << "Date,Close,Indicator\n";  // Header
-//    for (const auto& i : this->indicators) {
+    file << "Date,Close,Indicator\n";
+
     for (int i=0;i<this->ts.timeseries.size();i++) {
         file << this->ts.timeseries[i].datetime << "," << this->ts.timeseries[i].close << "," << this->indicators[i] <<"\n";
     }
@@ -43,4 +44,4 @@ SMA::SMA(const TimeSeries& ts, const int period): Indicator(ts) {
     this->indicators = result;
 }
 
-Indicator::Indicator(TimeSeries ts): ts(ts) {}
+Indicator::Indicator(TimeSeries ts): ts(std::move(ts)) {}

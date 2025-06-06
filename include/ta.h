@@ -7,7 +7,7 @@ class Indicator {
 protected:
 
 
-    Indicator(TimeSeries ts);
+    explicit Indicator(TimeSeries ts);
 public:
     TimeSeries ts;  //better protected?
     std::vector<double> indicators; //better protected?

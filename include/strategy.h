@@ -1,7 +1,6 @@
 #ifndef STRATEGY_H
 #define STRATEGY_H
 #include "ta.h"
-#include <iostream>
 #include <fstream>
 
 enum Choice {
@@ -11,21 +10,20 @@ enum Choice {
 };
 
 
-
 class Strategy {
 protected:
     Indicator indicators;
     std::vector<Choice> choices;
 public:
-    Strategy(Indicator ind);
-    void saveToCsv(std::string filename);
+    explicit Strategy(Indicator ind);
+    void saveToCsv(const std::string& filename) const;
 };
 
 class SMA_Strategy : public Strategy {
 protected:
     SMA sma;
 public:
-    SMA_Strategy(SMA sma);
+    explicit SMA_Strategy(const SMA& sma);
 };
 
 #endif //STRATEGY_H

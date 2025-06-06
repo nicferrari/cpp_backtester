@@ -2,9 +2,10 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <utility>
 
-Data::Data(const std::string& dt, float o, float h, float l, float c)
-    : datetime(dt), open(o), high(h), low(l), close(c) {}
+Data::Data(std::string  dt, float o, float h, float l, float c)
+    : datetime(std::move(dt)), open(o), high(h), low(l), close(c) {}
 
 TimeSeries::TimeSeries(const std::string& filename) {
     std::ifstream file(filename);

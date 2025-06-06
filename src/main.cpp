@@ -5,11 +5,10 @@
 
 int main() {
     const TimeSeries ts("data.csv");
-    //ts.printData();
     const auto sma = SMA(ts, 5);
     sma.printIndicators();
     sma.saveToCsv("test.csv");
-    auto sma_strategy = SMA_Strategy(sma);
+    const auto sma_strategy = SMA_Strategy(sma);
     sma_strategy.saveToCsv("test2.csv");
     return 0;
 }
