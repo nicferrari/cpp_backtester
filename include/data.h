@@ -19,4 +19,6 @@ public:
     void saveToCsv(const std::string& filename) const;
 };
 
+void print(std::ostream& out, const std::string& formattedMessage);
+
 #endif // DATA_H

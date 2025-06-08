@@ -8,4 +8,6 @@ add_executable(MyExecutable src/main.cpp src/data.cpp
         src/ta.cpp
         include/strategy.h
         src/strategy.cpp
+        include/engine.h
+        src/engine.cpp
 )

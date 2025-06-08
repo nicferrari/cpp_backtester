@@ -12,9 +12,10 @@ enum Choice {
 
 class Strategy {
 protected:
-    Indicator indicators;
+
     std::vector<Choice> choices;
 public:
+    Indicator indicators;
     explicit Strategy(Indicator ind);
     void saveToCsv(const std::string& filename) const;
 };
