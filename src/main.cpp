@@ -4,6 +4,7 @@
 #include "ta.h"
 #include "engine.h"
 #include <iostream>
+#include "utilities.h"
 
 int main() {
     const TimeSeries ts("data.csv");
@@ -19,5 +20,6 @@ int main() {
     print(std::cout,msg);
     std::ofstream file("message.csv");
     print(file, msg);
+    writeToCSV(ts, sma, sma_strategy,engine.results,"serial_test.csv");
     return 0;
 }

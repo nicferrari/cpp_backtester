@@ -17,6 +17,7 @@ public:
     std::vector<Choice> choices;
     explicit Strategy(Indicator ind);
     void saveToCsv(const std::string& filename) const;
+    std::string writeToCsv(int index);
 };
 
 class SMA_Strategy : public Strategy {
@@ -25,5 +26,7 @@ protected:
 public:
     explicit SMA_Strategy(const SMA& sma);
 };
+
+std::string toString(Choice choice);
 
 #endif //STRATEGY_H

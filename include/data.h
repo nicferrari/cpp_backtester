@@ -9,6 +9,9 @@ public:
     std::string datetime;
     double open, high, low, close;
     Data(std::string  dt, float o, float h, float l, float c);
+    std::string toCsv() const {
+        return datetime + "," + std::to_string(open) + "," + std::to_string(high) + "," + std::to_string(low) + "," + std::to_string(close);
+    }
 };
 
 class TimeSeries {

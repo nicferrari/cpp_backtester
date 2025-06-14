@@ -9,7 +9,9 @@ class Results {
 public:
     std::vector<double> account;
     std::vector<double> positions;
+    std::vector<double> networth;
     explicit Results(const Strategy& strategy);
+    std::string writeToCsv(int index);
 };
 
 class Engine {

@@ -41,3 +41,15 @@ void Strategy::saveToCsv(const std::string& filename) const {
     file.close();
     std::cout << "Data saved to " << filename << std::endl;
 }
+
+std::string toString(Choice choice) {
+    switch (choice) {
+        case LONG: return "LONG";
+        case SHORT:return "SHORT";
+        case NA:return "NA";
+    }
+}
+
+std::string Strategy::writeToCsv(int index) {
+    return toString(choices[index]);
+}
