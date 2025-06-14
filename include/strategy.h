@@ -9,13 +9,12 @@ enum Choice {
     NA,
 };
 
+std::ostream& operator<<(std::ostream& os, const Choice choice);
 
 class Strategy {
-protected:
-
-    std::vector<Choice> choices;
 public:
     Indicator indicators;
+    std::vector<Choice> choices;
     explicit Strategy(Indicator ind);
     void saveToCsv(const std::string& filename) const;
 };

@@ -12,7 +12,7 @@ int main() {
     sma.saveToCsv("test.csv");
     const auto sma_strategy = SMA_Strategy(sma);
     sma_strategy.saveToCsv("test2.csv");
-    Engine engine;
+    Engine engine(sma_strategy);
     engine.execute(sma_strategy);
 
     const std::string msg ="test";

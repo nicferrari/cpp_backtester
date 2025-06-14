@@ -5,12 +5,10 @@
 
 class Indicator {
 protected:
-
-
     explicit Indicator(TimeSeries ts);
 public:
-    TimeSeries ts;  //better protected?
-    std::vector<double> indicators; //better protected?
+    TimeSeries ts;
+    std::vector<double> indicators;
     void printIndicators() const;
     void saveToCsv(const std::string& filename) const;
 };
