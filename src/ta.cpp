@@ -34,7 +34,7 @@ SMA::SMA(const TimeSeries& ts, const int period): Indicator(ts) {
     double sum = 0;
     for (int i = 0; i < period; i++) {
         sum += ts.timeseries[i].close;
-        result.push_back(-1);
+        if (i!=period-1) result.push_back(-1);
     }
     result.push_back(sum / period);
     for (int i = period; i < ts.timeseries.size(); i++) {
