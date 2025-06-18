@@ -5,17 +5,28 @@
 #include <utility>
 #include "data.h"
 
-SMA_Strategy::SMA_Strategy(const SMA& sma): Strategy(sma), sma(sma) {
-    size_t i = this->indicators.ts.timeseries.size();
-    choices.resize(i,Choice::NA);
+Strategy::Strategy(TimeSeries ts):ts(ts) {}
+
+SMA_Strategy::SMA_Strategy(TimeSeries ts, int period): Strategy(ts), sma(ts,period) {
+    size_t i = ts.timeseries.size();
+    choices.resize(i, Choice::NA);
     for (int j = 0; j < i; j++) {
-        if (this->sma.indicators[j]==-1) choices[j]=NA;
-        else if (this->sma.ts.timeseries[j].close>this->sma.indicators[j]) choices[j]=LONG;
-        else if (this->sma.ts.timeseries[j].close<this->sma.indicators[j]) choices[j]=SHORT;
+        if (this->sma.indicators[j] == -1) choices[j] = NA;
+        else if (this->sma.ts.timeseries[j].close > this->sma.indicators[j]) choices[j] = LONG;
+        else if (this->sma.ts.timeseries[j].close < this->sma.indicators[j]) choices[j] = SHORT;
     }
 }
 
-Strategy::Strategy(Indicator ind):indicators(std::move(ind)) {}
+SMA_Cross_Strategy::SMA_Cross_Strategy(TimeSeries ts, int short_period, int long_period): Strategy(ts), sma_short(ts, short_period),sma_long(ts, long_period){
+    size_t i = ts.timeseries.size();
+    choices.resize(i, NA);
+    for (int j = 0; j < i; j++) {
+        if (this->sma_long.indicators[j] == -1) choices[j] = NA;
+        else if (this->sma_short.indicators[j] >= sma_long.indicators[j]) choices[j] = LONG;
+        else choices[j] = SHORT;
+    }
+}
+
 
 std::ostream& operator<<(std::ostream& os, const Choice choice) {
     switch (choice) {
@@ -26,7 +37,7 @@ std::ostream& operator<<(std::ostream& os, const Choice choice) {
     }
     return os;
 }
-
+/*
 void Strategy::saveToCsv(const std::string& filename) const {
     std::ofstream file(filename);
     if (!file.is_open()) {
@@ -41,7 +52,7 @@ void Strategy::saveToCsv(const std::string& filename) const {
     file.close();
     std::cout << "Data saved to " << filename << std::endl;
 }
-
+*/
 std::string toString(Choice choice) {
     switch (choice) {
         case LONG: return "LONG";

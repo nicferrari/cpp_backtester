@@ -13,18 +13,24 @@ std::ostream& operator<<(std::ostream& os, const Choice choice);
 
 class Strategy {
 public:
-    Indicator indicators;
+    TimeSeries ts;
     std::vector<Choice> choices;
-    explicit Strategy(Indicator ind);
     void saveToCsv(const std::string& filename) const;
     std::string writeToCsv(int index);
+    Strategy(TimeSeries ts);
 };
 
 class SMA_Strategy : public Strategy {
-protected:
-    SMA sma;
 public:
-    explicit SMA_Strategy(const SMA& sma);
+    SMA sma;
+    SMA_Strategy(TimeSeries ts,int period);
+};
+
+class SMA_Cross_Strategy : public Strategy {
+public:
+    SMA sma_short;
+    SMA sma_long;
+    SMA_Cross_Strategy(TimeSeries ts, int short_period, int long_period);
 };
 
 std::string toString(Choice choice);
