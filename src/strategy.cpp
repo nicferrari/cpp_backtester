@@ -12,8 +12,8 @@ SMA_Strategy::SMA_Strategy(TimeSeries ts, int period): Strategy(ts), sma(ts,peri
     choices.resize(i, Choice::NA);
     for (int j = 0; j < i; j++) {
         if (this->sma.indicators[j] == -1) choices[j] = NA;
-        else if (this->sma.ts.timeseries[j].close > this->sma.indicators[j]) choices[j] = LONG;
-        else if (this->sma.ts.timeseries[j].close < this->sma.indicators[j]) choices[j] = SHORT;
+        else if (this->sma.ts.timeseries[j].close > this->sma.indicators[j]) choices[j] = SHORT;
+        else if (this->sma.ts.timeseries[j].close < this->sma.indicators[j]) choices[j] = LONG;
     }
 }
 

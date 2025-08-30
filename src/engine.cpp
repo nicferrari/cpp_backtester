@@ -11,6 +11,7 @@ void Engine::execute(const Strategy& strategy) {
         std::cout << strategy.ts.timeseries[i].datetime << " " << strategy.choices[i] <<" " << this->results.account[i] << std::endl;
         results.account[i] = results.account[i-1];
         results.positions[i] = results.positions[i-1];
+        //initial period networth
         results.networth[i] = results.account[i] + results.positions[i] * strategy.ts.timeseries[i].open;
         if (strategy.choices[i-1]!=strategy.choices[i-2]) {
             std::cout << "ORDER" << (strategy.choices[i-1]==LONG?" BUY":" SELL") << std::endl;
@@ -27,6 +28,8 @@ void Engine::execute(const Strategy& strategy) {
                     break;
             }
         }
+        //end of period networth (to be written to file)
+        results.networth[i] = results.account[i] + results.positions[i] * strategy.ts.timeseries[i].close;
         std::cout << "account = " << results.account[i] << " - positions = " << results.positions[i] << " - networth = " << results.networth[i] <<std::endl;
 //        previousChoice = strategy.choices[i];
         this->results = results;
