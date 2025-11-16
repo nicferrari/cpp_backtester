@@ -26,6 +26,7 @@ void Engine::execute(const Strategy& strategy) {
                     //results.account[i] += (-results.positions[i]+results.positions[i-1])*strategy.indicators.ts.timeseries[i].open;
                     results.account[i] = results.networth[i] - results.positions[i]*strategy.ts.timeseries[i].open;
                     break;
+                default: ;
             }
         }
         //end of period networth (to be written to file)
@@ -36,7 +37,7 @@ void Engine::execute(const Strategy& strategy) {
     }
 }
 
-Engine::Engine(Strategy strategy): results(std::move(strategy)) {}
+Engine::Engine(const Strategy& strategy): results(strategy) {}
 
 Results::Results(const Strategy& strategy) {
     const size_t size = strategy.ts.timeseries.size();
@@ -45,6 +46,6 @@ Results::Results(const Strategy& strategy) {
     networth.assign(size, 100000);
 }
 
-std::string Results::writeToCsv(int index) {
+std::string Results::writeToCsv(int index) const {
     return std::to_string(account[index]) + "," + std::to_string(positions[index]) + "," + std::to_string(networth[index]);
 }

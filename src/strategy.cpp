@@ -5,9 +5,9 @@
 #include <utility>
 #include "data.h"
 
-Strategy::Strategy(TimeSeries ts):ts(ts) {}
+Strategy::Strategy(TimeSeries  ts):ts(std::move(ts)) {}
 
-SMA_Strategy::SMA_Strategy(TimeSeries ts, int period): Strategy(ts), sma(ts,period) {
+SMA_Strategy::SMA_Strategy(const TimeSeries& ts, const int period): Strategy(ts), sma(ts,period) {
     size_t i = ts.timeseries.size();
     choices.resize(i, Choice::NA);
     for (int j = 0; j < i; j++) {
@@ -17,7 +17,7 @@ SMA_Strategy::SMA_Strategy(TimeSeries ts, int period): Strategy(ts), sma(ts,peri
     }
 }
 
-SMA_Cross_Strategy::SMA_Cross_Strategy(TimeSeries ts, int short_period, int long_period): Strategy(ts), sma_short(ts, short_period),sma_long(ts, long_period){
+SMA_Cross_Strategy::SMA_Cross_Strategy(const TimeSeries& ts, const int short_period, const int long_period): Strategy(ts), sma_short(ts, short_period),sma_long(ts, long_period){
     size_t i = ts.timeseries.size();
     choices.resize(i, NA);
     for (int j = 0; j < i; j++) {
@@ -53,14 +53,15 @@ void Strategy::saveToCsv(const std::string& filename) const {
     std::cout << "Data saved to " << filename << std::endl;
 }
 */
-std::string toString(Choice choice) {
+std::string toString(const Choice choice) {
     switch (choice) {
         case LONG: return "LONG";
         case SHORT:return "SHORT";
         case NA:return "NA";
     }
+    return "something wrong";
 }
 
-std::string Strategy::writeToCsv(int index) {
+std::string Strategy::writeToCsv(int index) const {
     return toString(choices[index]);
 }

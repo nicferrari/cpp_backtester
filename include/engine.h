@@ -11,14 +11,14 @@ public:
     std::vector<double> positions;
     std::vector<double> networth;
     explicit Results(const Strategy& strategy);
-    std::string writeToCsv(int index);
+    [[nodiscard]] std::string writeToCsv(int index) const;
 };
 
 class Engine {
 public:
     void execute(const Strategy& strategy);
     Results results;
-    explicit Engine(Strategy strategy);
+    explicit Engine(const Strategy& strategy);
 };
 
 

@@ -11,7 +11,7 @@ public:
     std::vector<double> indicators;
     void printIndicators() const;
     void saveToCsv(const std::string& filename) const;
-    std::string writeToCsv(int index);
+    [[nodiscard]] std::string writeToCsv(int index) const;
 };
 
 class SMA:public Indicator {
