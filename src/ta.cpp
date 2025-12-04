@@ -46,6 +46,6 @@ SMA::SMA(const TimeSeries& ts, const int period): Indicator(ts) {
 
 Indicator::Indicator(TimeSeries ts): ts(std::move(ts)) {}
 
-std::string Indicator::writeToCsv(const int index) const {
+std::string Indicator::writeToCsv(size_t index) const {
     return std::to_string(indicators[index]);
 }

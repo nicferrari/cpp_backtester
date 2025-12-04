@@ -11,7 +11,7 @@ public:
     std::vector<double> positions;
     std::vector<double> networth;
     explicit Results(const Strategy& strategy);
-    [[nodiscard]] std::string writeToCsv(int index) const;
+    [[nodiscard]] std::string writeToCsv(size_t index) const;
 };
 
 class Engine {

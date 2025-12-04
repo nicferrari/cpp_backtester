@@ -12,8 +12,8 @@ SMA_Strategy::SMA_Strategy(const TimeSeries& ts, const int period): Strategy(ts)
     choices.resize(i, Choice::NA);
     for (int j = 0; j < i; j++) {
         if (this->sma.indicators[j] == -1) choices[j] = NA;
-        else if (this->sma.ts.timeseries[j].close > this->sma.indicators[j]) choices[j] = SHORT;
-        else if (this->sma.ts.timeseries[j].close < this->sma.indicators[j]) choices[j] = LONG;
+        else if (this->sma.ts.timeseries[j].close > this->sma.indicators[j]) choices[j] = LONG;
+        else if (this->sma.ts.timeseries[j].close < this->sma.indicators[j]) choices[j] = SHORT;
     }
 }
 
@@ -62,6 +62,6 @@ std::string toString(const Choice choice) {
     return "something wrong";
 }
 
-std::string Strategy::writeToCsv(int index) const {
+std::string Strategy::writeToCsv(size_t index) const {
     return toString(choices[index]);
 }

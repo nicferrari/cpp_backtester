@@ -6,7 +6,7 @@
 #include "engine.h"
 #include "ta.h"
 
-void writeToCSV(TimeSeries ts, std::vector<Indicator> indicators, Strategy& strategy, Results results, const std::string& filename) {
+void writeToCSV(const TimeSeries &ts, const std::vector<Indicator>& indicators, const Strategy& strategy, const Results& results, const std::string& filename) {
     std::ofstream file(filename);
 
     if (!file.is_open()) {

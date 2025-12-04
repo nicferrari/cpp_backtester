@@ -16,7 +16,7 @@ public:
     TimeSeries ts;
     std::vector<Choice> choices;
     //void saveToCsv(const std::string& filename) const;
-    [[nodiscard]] std::string writeToCsv(int index) const;
+    [[nodiscard]] std::string writeToCsv(size_t index) const;
     explicit Strategy(TimeSeries  ts);
 };
 

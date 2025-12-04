@@ -19,7 +19,7 @@ const TimeSeries ts("data.csv");
 ```cpp
 SMA_Strategy sma_strategy(ts,5);
 ```
-- Create and run backtesting Engine:
+- Create and run the backtesting Engine:
 ```cpp
 Engine engine(sma_strategy);
 engine.execute(sma_strategy);
