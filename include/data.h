@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <span>
 
 class Data {
 public:

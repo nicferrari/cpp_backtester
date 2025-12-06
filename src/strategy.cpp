@@ -8,7 +8,7 @@
 Strategy::Strategy(TimeSeries  ts):ts(std::move(ts)) {}
 
 SMA_Strategy::SMA_Strategy(const TimeSeries& ts, const int period): Strategy(ts), sma(ts,period) {
-    size_t i = ts.timeseries.size();
+    const size_t i = ts.timeseries.size();
     choices.resize(i, Choice::NA);
     for (int j = 0; j < i; j++) {
         if (this->sma.indicators[j] == -1) choices[j] = NA;
@@ -18,7 +18,7 @@ SMA_Strategy::SMA_Strategy(const TimeSeries& ts, const int period): Strategy(ts)
 }
 
 SMA_Cross_Strategy::SMA_Cross_Strategy(const TimeSeries& ts, const int short_period, const int long_period): Strategy(ts), sma_short(ts, short_period),sma_long(ts, long_period){
-    size_t i = ts.timeseries.size();
+    const size_t i = ts.timeseries.size();
     choices.resize(i, NA);
     for (int j = 0; j < i; j++) {
         if (this->sma_long.indicators[j] == -1) choices[j] = NA;

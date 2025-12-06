@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include <utility>
+#include <span>
 
 Data::Data(std::string  dt, float o, float h, float l, float c)
     : datetime(std::move(dt)), open(o), high(h), low(l), close(c) {}
