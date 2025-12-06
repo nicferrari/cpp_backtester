@@ -11,6 +11,8 @@ add_library(backtester_lib
         src/ta_s.cpp
         src/strategy_s.cpp
         src/risk_manager.cpp
+        src/engine_s.cpp
+        src/broker.cpp
 )
 
 target_include_directories(backtester_lib PUBLIC include)
@@ -21,6 +23,9 @@ foreach(EXAMPLE_FILE ${EXAMPLES})
     get_filename_component(EXAMPLE_NAME ${EXAMPLE_FILE} NAME_WE)
     add_executable(${EXAMPLE_NAME} ${EXAMPLE_FILE}
             include/ta_s.h
-            include/strategy_h.h)
+            include/strategy_h.h
+            include/risk_manager.h
+            include/engine_s.h
+            include/broker.h)
     target_link_libraries(${EXAMPLE_NAME} PRIVATE backtester_lib)
 endforeach()
