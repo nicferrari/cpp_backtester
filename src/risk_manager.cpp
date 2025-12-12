@@ -8,7 +8,6 @@ Order::Order(Choice choice, order_status status) {
     this->status = status;
 }
 
-
 void Order::new_action(Choice choice){
     if (this->choice!=choice){this->choice=choice;this->status=SENT;}
 }

@@ -26,6 +26,7 @@ foreach(EXAMPLE_FILE ${EXAMPLES})
             include/strategy_h.h
             include/risk_manager.h
             include/engine_s.h
-            include/broker.h)
+            include/broker.h
+            include/Results.h)
     target_link_libraries(${EXAMPLE_NAME} PRIVATE backtester_lib)
 endforeach()
