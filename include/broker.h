@@ -1,7 +1,7 @@
 #ifndef BROKER_H
 #define BROKER_H
 
-#include "Results.h"
+#include "results.h"
 #include "risk_manager.h"
 
 class Broker {
@@ -9,7 +9,7 @@ public:
     Choice currentStance;
     double account;
     double position;
-    Order executeOrder(Order order, double price, Results& results);
+    Order executeOrder(Order order, double price, std::string date, Results& results);
     explicit Broker(double account);
 };
 

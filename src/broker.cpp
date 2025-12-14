@@ -1,12 +1,17 @@
 #include "broker.h"
 
-#include "Results.h"
+#include "results.h"
 #include "risk_manager.h"
 
 //updates account and position and then returns an Order(side, OPEN) if any was SENT; otherwise returns previous Order
-Order Broker::executeOrder(Order order, const double price, Results& results) {
+Order Broker::executeOrder(Order order, const double price, std::string date, Results& results) {
     if (order.status == SENT) {
         //close any existing position
+        if (this->position!=0) {
+            order.end_date=date;
+            order.status = CLOSED;
+            results.trade.push_back(order);
+        }
         if (this->currentStance ==LONG) {
             this->account = this->position*price;
             this->position=0;
@@ -25,7 +30,7 @@ Order Broker::executeOrder(Order order, const double price, Results& results) {
         //update stance and status
         this->currentStance = order.choice;
         results.trades_nr++;
-        return {order.choice, OPEN};
+        return {order.choice, OPEN, date};
     }
     return order;
 }

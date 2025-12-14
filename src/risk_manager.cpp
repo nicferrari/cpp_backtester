@@ -3,9 +3,10 @@
 
 
 
-Order::Order(Choice choice, order_status status) {
+Order::Order(Choice choice, order_status status, std::string date) {
     this->choice = choice;
     this->status = status;
+    this->open_date = date;
 }
 
 void Order::new_action(Choice choice){

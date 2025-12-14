@@ -14,7 +14,9 @@ class Order {
 public:
     Choice choice;
     order_status status;
-    Order(Choice choice, order_status status);
+    std::string open_date;
+    std::string end_date;
+    Order(Choice choice, order_status status, std::string date);
     void new_action(Choice choice);
 };
 
