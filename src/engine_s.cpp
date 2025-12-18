@@ -28,6 +28,26 @@ void Engine::run(const TimeSeries &ts, Results& results) {
     }
     std::cout<<"return = "<<log(results.networth.back()/results.networth.front())<<std::endl;
     std::cout<<"trades# = "<<results.trades_nr<<std::endl;
-    results.trade_list();
-    results.get_trade(ts,results.trade.front().open_date,results.trade.back().end_date);
+    //results.trade_list();
+    double max_pl = 0;
+    double min_pl = 0;
+    double avg_pl = 0;
+    int winrate = 0;
+    double avg_duration=0;
+    for (const auto& i: results.trade){
+        const double pl = Results::trade_pl(ts,i.open_date,i.end_date,i.choice);
+        if (pl >= max_pl) max_pl = pl;
+        if (pl < min_pl) min_pl = pl;
+        if (pl>=0) winrate++;
+        avg_pl += pl;
+        const double duration = Results::trade_duration(ts,i.open_date,i.end_date);
+        avg_duration += duration;
+    };
+    std::cout<<"max pl = "<<max_pl<<std::endl;
+    std::cout<<"min pl = "<<min_pl<<std::endl;
+    std::cout<<"avg pl = "<<avg_pl/results.trades_nr<<std::endl;
+    std::cout<<"winrate = "<<static_cast<double>(winrate)/results.trades_nr<<std::endl;
+    std::cout<<"sharpe ratio = "<<results.sharpe_ratio()<<std::endl;
+    std::cout<<"max drawdown = "<<results.max_drawdown()<<std::endl;
+    std::cout<<"avg duration = "<<avg_duration/results.trades_nr<<std::endl;
 };

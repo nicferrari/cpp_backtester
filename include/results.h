@@ -13,6 +13,9 @@ public:
     std::vector<double> networth;
     std::vector<Order> trade;
     void trade_list() const;
-    void get_trade(const TimeSeries& ts, std::string start_date, std::string end_date);
+    static double trade_pl(const TimeSeries &ts, const std::string& start_date, const std::string& end_date, Choice side);
+    static double trade_duration(const TimeSeries &ts, const std::string &start_date, const std::string &end_date);
+    double sharpe_ratio() const;
+    double max_drawdown() const;
 };
 #endif //RESULTS_H

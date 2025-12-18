@@ -10,7 +10,10 @@ Order Broker::executeOrder(Order order, const double price, std::string date, Re
         if (this->position!=0) {
             order.end_date=date;
             order.status = CLOSED;
-            results.trade.push_back(order);
+            Order previous_order = order;
+            //todo: find a better way for the following line (necessary as order being passed in the function is the new one not the previous to be closed)
+            if (previous_order.choice==LONG){previous_order.choice=SHORT;}else{previous_order.choice=LONG;}
+            results.trade.push_back(previous_order);
         }
         if (this->currentStance ==LONG) {
             this->account = this->position*price;
