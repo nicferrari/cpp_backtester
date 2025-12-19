@@ -15,7 +15,7 @@ public:
     void trade_list() const;
     static double trade_pl(const TimeSeries &ts, const std::string& start_date, const std::string& end_date, Choice side);
     static double trade_duration(const TimeSeries &ts, const std::string &start_date, const std::string &end_date);
-    double sharpe_ratio() const;
-    double max_drawdown() const;
+    [[nodiscard]] double sharpe_ratio() const;
+    [[nodiscard]] double max_drawdown() const;
 };
 #endif //RESULTS_H

@@ -21,7 +21,6 @@ double Results::trade_pl(const TimeSeries &ts, const std::string& start_date, co
     const auto index2 = std::find(dates.begin(),dates.end(),end_date);
     const size_t d1 = std::distance(dates.begin(),index1);
     const size_t d2 = std::distance(dates.begin(),index2);
-    //std::cout<<side<<" - "<<d2<<" - " << d1 <<" - " <<ts.timeseries[d2].open<<" - "<<ts.timeseries[d1].open<<"- "<<-log(ts.timeseries[d2].open/ts.timeseries[d1].open)<<std::endl;
     if (side == LONG){return log(ts.timeseries[d2].open/ts.timeseries[d1].open);}
     return -log(ts.timeseries[d2].open/ts.timeseries[d1].open);
 }
@@ -81,5 +80,4 @@ double Results::max_drawdown() const {
     }
     return max_dd;
 }
-
 

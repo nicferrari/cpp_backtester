@@ -11,7 +11,6 @@ add_library(backtester_lib
         src/ta_s.cpp
         src/strategy_s.cpp
         src/risk_manager.cpp
-        src/engine_s.cpp
         src/broker.cpp
 )
 
