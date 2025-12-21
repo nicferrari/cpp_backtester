@@ -7,24 +7,22 @@ Backtester is a financial backtesting library entirely written in C++.
 - Import necessary modules:
 ```cpp
 #include "data.h"
-#include "strategy.h"
-#include "engine.h"
-#include "utilities.h"
+#include "engine_s.h"
+#include "strategy_h.h"
 ```
 - Load data via the constructor of TimeSeries:
 ```cpp
 const TimeSeries ts("data.csv");
 ```
-- Define a strategy:
+- Define an instance of class Results to store metrics and logs:
 ```cpp
-SMA_Strategy sma_strategy(ts,5);
+Results results;
 ```
-- Create and run the backtesting Engine:
+- Run the backtesting Engine by passing a user defined strategy (which returns a Choice for every index i):
 ```cpp
-Engine engine(sma_strategy);
-engine.execute(sma_strategy);
+Engine::run(ts, results, [&](size_t i){return sma_strategy(ts,10,i);});
 ```
-- Now you can save to csv:
+- Now you can print the results:
 ```cpp
-writeToCSV(ts, {sma_strategy.sma}, sma_strategy,engine.results,"bt.csv");
+results.print(ts);
 ```

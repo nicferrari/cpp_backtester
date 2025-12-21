@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.15)
 project(backtester)
 
-
 add_library(backtester_lib
         src/data.cpp
         src/ta.cpp
@@ -27,6 +26,6 @@ foreach(EXAMPLE_FILE ${EXAMPLES})
             include/engine_s.h
             include/broker.h
             include/Results.h
-            include/results.cpp)
+            src/results.cpp)
     target_link_libraries(${EXAMPLE_NAME} PRIVATE backtester_lib)
 endforeach()

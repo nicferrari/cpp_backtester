@@ -43,3 +43,18 @@ Broker::Broker(const double account) {
     this->position=0;
     this->account=account;
 }
+void Broker::forceCloseLastTrade(Order order, double price, std::string date, Results &results) {
+        if (this->position!=0) {
+            order.end_date=date;
+            order.status = CLOSED;
+            Order previous_order = order;
+            results.trade.push_back(previous_order);
+        }
+        if (this->currentStance ==LONG) {
+            this->account = this->position*price;
+            this->position=0;
+        } else if (this->currentStance == SHORT){
+            this->account -= -this->position*price;
+            this->position=0;
+        }
+}

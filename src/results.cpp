@@ -1,4 +1,4 @@
-#include "results.h"
+#include "../include/results.h"
 #include <iostream>
 #include <algorithm>
 #include <cmath>
@@ -81,3 +81,34 @@ double Results::max_drawdown() const {
     return max_dd;
 }
 
+void Results::print(const TimeSeries& ts) const {
+    std::cout<<"Start Date = "<<ts.timeseries.front().datetime<<std::endl;
+    std::cout<<"End Date = "<<ts.timeseries.back().datetime<<std::endl;
+    std::cout<<"Return = "<<log(networth.back()/networth.front())*100<<"%"<<std::endl;
+    std::cout<<"Trades# = "<<trades_nr<<std::endl;
+    double max_pl = 0;
+    double min_pl = 0;
+    double avg_pl = 0;
+    int winrate = 0;
+    double avg_duration=0;
+    for (const auto& i: trade){
+        const double pl = Results::trade_pl(ts,i.open_date,i.end_date,i.choice);
+        if (pl >= max_pl) max_pl = pl;
+        if (pl < min_pl) min_pl = pl;
+        if (pl>=0) winrate++;
+        avg_pl += pl;
+        const double duration = Results::trade_duration(ts,i.open_date,i.end_date);
+        avg_duration += duration;
+    };
+    std::cout<<"Max pl = "<<max_pl*100<<"%"<<std::endl;
+    std::cout<<"Min pl = "<<min_pl*100<<"%"<<std::endl;
+    std::cout<<"Avg pl = "<<avg_pl/trades_nr*100<<"%"<<std::endl;
+    std::cout<<"Winrate = "<<static_cast<double>(winrate)/trades_nr*100<<"%"<<std::endl;
+    std::cout<<"Sharpe ratio = "<<sharpe_ratio()<<std::endl;
+    std::cout<<"Max drawdown = "<<max_drawdown()*100<<"%"<<std::endl;
+    std::cout<<"Avg duration = "<<avg_duration/trades_nr<<std::endl;
+};
+
+Results::Results() {
+    trades_nr=0;
+}

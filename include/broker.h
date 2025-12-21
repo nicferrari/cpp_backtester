@@ -10,6 +10,7 @@ public:
     double account;
     double position;
     Order executeOrder(Order order, double price, std::string date, Results& results);
+    void forceCloseLastTrade(Order order, double price, std::string date, Results& results);
     explicit Broker(double account);
 };
 
