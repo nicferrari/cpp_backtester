@@ -1,16 +1,18 @@
-#include "strategy.h"
 #include "risk_manager.h"
+#include <fstream>
 
+#include "results.h"
 
-
-Order::Order(Choice choice, order_status status, std::string date) {
+Order::Order(const Choice choice, const order_status status, const std::string &date) {
     this->choice = choice;
     this->status = status;
     this->open_date = date;
 }
 
 void Order::new_action(Choice choice){
-    if (this->choice!=choice){this->choice=choice;this->status=SENT;}
+    if (this->choice!=choice) {
+        this->choice=choice;this->status=SENT;
+    }
 }
 
 std::ostream& operator<<(std::ostream& os, const order_status status) {

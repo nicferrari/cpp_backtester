@@ -7,13 +7,17 @@ class Results {
 public:
     int trades_nr;
     std::vector<double> networth;
+    std::vector<Order> orders;
     std::vector<Order> trade;
-    void trade_list() const;
     static double trade_pl(const TimeSeries &ts, const std::string& start_date, const std::string& end_date, Choice side);
     static double trade_duration(const TimeSeries &ts, const std::string &start_date, const std::string &end_date);
     [[nodiscard]] double sharpe_ratio() const;
     [[nodiscard]] double max_drawdown() const;
+    void trade_list() const;
+    void tradesToCsv(const std::string& filename) const;
+    void ordersToCsv(const std::string& filename) const;
     void print(const TimeSeries& ts) const;
     Results();
 };
+
 #endif //RESULTS_H

@@ -57,7 +57,7 @@ void TimeSeries::saveToCsv(const std::string &filename) const {
         file << i.datetime << "," << i.open << "," << i.high << "," << i.low << "," << i.close <<"\n";
     }
     file.close();
-    std::cout << "Data saved to " << filename << std::endl;
+    std::cout << "\033[34mTimeseries saved to " << filename << std::endl;
 }
 
 void print(std::ostream& out, const std::string& formattedMessage ) {

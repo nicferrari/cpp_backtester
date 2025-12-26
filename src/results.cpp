@@ -1,5 +1,6 @@
-#include "../include/results.h"
+#include "results.h"
 #include <iostream>
+#include <fstream>
 #include <algorithm>
 #include <cmath>
 #include <numeric>
@@ -111,4 +112,30 @@ void Results::print(const TimeSeries& ts) const {
 
 Results::Results() {
     trades_nr=0;
+}
+
+void Results::tradesToCsv(const std::string& filename) const {
+    std::ofstream file(filename);
+    if (!file.is_open()) {
+        std::cerr << "Error opening file\n";
+        return;
+    }
+    file<<"Open Date,End Date,Choice,Status\n";
+    for (const auto & t:trade) {
+        file<<t.open_date<<","<<t.end_date<<","<<t.choice<<","<<t.status<<"\n";
+    }
+    file.close();
+}
+
+void Results::ordersToCsv(const std::string &filename) const {
+    std::ofstream file(filename);
+    if (!file.is_open()) {
+        std::cerr << "Error opening file\n";
+        return;
+    }
+    file<<"Choice,Status,Open Date, End date\n";
+    for (const auto & o:orders) {
+        file<<o.choice<<","<<o.status<<","<<o.open_date<<","<<o.end_date<<"\n";
+    }
+    file.close();
 }
