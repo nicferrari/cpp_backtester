@@ -23,7 +23,7 @@ public:
             results.networth.push_back(broker.position*ts.timeseries[i].close+broker.account);
         }
         //force close last trade
-        broker.forceCloseLastTrade(order, ts.timeseries.back().close, ts.timeseries.back().datetime, results);
+        broker.forceCloseLastTrade(ts.timeseries.back().close, ts.timeseries.back().datetime, results);
 
         const auto end = std::chrono::high_resolution_clock::now();
         const auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);

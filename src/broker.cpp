@@ -10,10 +10,8 @@ Order Broker::executeOrder(Order order, const double price, std::string date, Re
         if (this->position!=0) {
             order.end_date=date;
             order.status = CLOSED;
-            Order previous_order = order;
-            //todo: find a better way for the following line which only works for always in strategies (necessary as order being passed in the function is the new one not the previous to be closed)
-            if (previous_order.choice==LONG){previous_order.choice=SHORT;}else{previous_order.choice=LONG;}
-            results.trade.push_back(previous_order);
+            results.trade.back().status=CLOSED;
+            results.trade.back().end_date=date;
         }
         if (this->currentStance ==LONG) {
             this->account = this->position*price;
@@ -26,13 +24,18 @@ Order Broker::executeOrder(Order order, const double price, std::string date, Re
         if (order.choice == LONG) {
             this->position = account/price;
             this->account = 0;
+            results.trade.push_back(Order{order.choice, OPEN,date});
+            results.trades_nr++;
         } else if (order.choice == SHORT) {
             this->position = -account/price;
             this->account += account;
+            results.trade.push_back(Order{order.choice, OPEN,date});
+            results.trades_nr++;
         }
         //update stance and status
         this->currentStance = order.choice;
-        results.trades_nr++;
+        //results.trades_nr++;
+        //results.trade.push_back(Order{order.choice, OPEN,date});
         return {order.choice, OPEN, date};
     }
     return order;
@@ -43,18 +46,16 @@ Broker::Broker(const double account) {
     this->position=0;
     this->account=account;
 }
-void Broker::forceCloseLastTrade(Order order, double price, std::string date, Results &results) {
-        if (this->position!=0) {
-            order.end_date=date;
-            order.status = CLOSED;
-            Order previous_order = order;
-            results.trade.push_back(previous_order);
-        }
-        if (this->currentStance ==LONG) {
-            this->account = this->position*price;
-            this->position=0;
-        } else if (this->currentStance == SHORT){
-            this->account -= -this->position*price;
-            this->position=0;
-        }
+
+void Broker::forceCloseLastTrade(double price, std::string date, Results &results) {
+    results.trade.back().end_date = date;
+    results.trade.back().status = CLOSED;
+    if (results.trade.back().choice== LONG) {
+        this->account = this->position*price;
+        this->position=0;
+    } else if (results.trade.back().choice == SHORT){
+        this->account -= -this->position*price;
+        this->position=0;
+    }
 }
+

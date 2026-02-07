@@ -13,6 +13,7 @@ int main() {
     Results results2;
     Engine::run(ts, results2, [](size_t){return buy_and_hold();});
     results2.print(ts);
+    results2.trade_list();
     Results results3;
     Engine::run(ts, results3, [&](const size_t i){return sma_cross_strategy(ts, 10, 20, i);});
     results3.print(ts);

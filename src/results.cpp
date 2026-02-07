@@ -86,7 +86,7 @@ void Results::print(const TimeSeries& ts) const {
     std::cout<<"Start Date = "<<ts.timeseries.front().datetime<<std::endl;
     std::cout<<"End Date = "<<ts.timeseries.back().datetime<<std::endl;
     std::cout<<"Return = "<<log(networth.back()/networth.front())*100<<"%"<<std::endl;
-    std::cout<<"Trades# = "<<trades_nr<<std::endl;
+    std::cout<<"Trades # = "<<trade.size()<<std::endl;
     double max_pl = 0;
     double min_pl = 0;
     double avg_pl = 0;
