@@ -139,3 +139,32 @@ void Results::ordersToCsv(const std::string &filename) const {
     }
     file.close();
 }
+
+Metrics Results::toMetrics(const TimeSeries& ts) const {
+    Metrics metrics;
+    metrics.startDate = ts.timeseries.front().datetime;
+    metrics.endDate = ts.timeseries.back().datetime;
+    metrics.trades_nr = trade.size();
+    double max_pl = 0;
+    double min_pl = 0;
+    double avg_pl = 0;
+    int winrate = 0;
+    double avg_duration=0;
+    for (const auto& i: trade){
+        const double pl = Results::trade_pl(ts,i.open_date,i.end_date,i.choice);
+        if (pl >= max_pl) max_pl = pl;
+        if (pl < min_pl) min_pl = pl;
+        if (pl>=0) winrate++;
+        avg_pl += pl;
+        const double duration = Results::trade_duration(ts,i.open_date,i.end_date);
+        avg_duration += duration;
+    };
+    metrics.max_pl = max_pl*100;
+    metrics.min_pl = min_pl*100;
+    metrics.avg_pl = avg_pl/trades_nr*100;
+    metrics.winrate = static_cast<double>(winrate)/trades_nr*100;
+    metrics.sharpe_ratio = sharpe_ratio();
+    metrics.max_drawdown = max_drawdown()*100;
+    metrics.avg_duration = avg_duration/trades_nr;
+    return metrics;
+}

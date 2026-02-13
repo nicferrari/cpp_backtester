@@ -22,4 +22,6 @@ void writeToCsv(const TimeSeries &ts, Func f, std::string filename) {
     std::cout << "\033[34mTimeseries+Indicator saved to " << filename << std::endl;
 }
 
+void compareResults(const std::vector<Metrics>& metrics);
+
 #endif //UTILITIES_H
